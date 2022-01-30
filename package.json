@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/katcontrerasdev/uclaProject2/issues"
   },
-  "homepage": "https://github.com/katcontrerasdev/uclaProject2#readme"
+  "homepage": "https://github.com/katcontrerasdev/uclaProject2#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
