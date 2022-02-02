@@ -81,4 +81,10 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/game', (req, res) => {
+  console.log("game router ran");
+  res.render('game');
+});
+
+
 module.exports = router;
