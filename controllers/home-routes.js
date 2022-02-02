@@ -3,6 +3,7 @@ const { Gallery, Painting } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth');
 
+
 // GET all galleries for homepage
 router.get('/', async (req, res) => {
   try {
@@ -79,6 +80,35 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+router.get('/register', (req, res, next) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('signup');
+});
+
+
+router.post('/register', async (req, res) => {
+  try {
+    const dbUserData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+
+    req.session.save(() => {
+      req.session.loggedIn = true;
+
+      res.status(200).json(dbUserData);
+    });
+    // res.render('signup');
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
