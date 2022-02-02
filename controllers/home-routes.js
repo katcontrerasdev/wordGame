@@ -90,25 +90,4 @@ router.get('/register', (req, res, next) => {
   res.render('signup');
 });
 
-
-router.post('/register', async (req, res) => {
-  try {
-    const dbUserData = await User.create({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-    });
-
-    req.session.save(() => {
-      req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
-    });
-    // res.render('signup');
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
 module.exports = router;
