@@ -1,115 +1,94 @@
-/*
 
-getRandomLetters(optional usedLetters)
+var activeGame;
 
-trySubmitWord
-https://dictionaryapi.dev/
-
-submitWord
-
-routes
-if logged in GET active game
-
-*/
-
-
-console.log("script ran");
-console.log(localStorage.getItem("activeGame"));
-
-//draw letters up to full maybe have a route to create/update
+//draw letters up to full in case of a new game or new round
 function drawLetters(){
-    const activeGame = (localStorage.getItem("activeGame") == null) ? {"letters": [], "score": 0, "activeWord": ""} : JSON.parse(localStorage.getItem("activeGame"));
+    //if there is an active game in memory get it, if not create one from scratch
+    activeGame = (localStorage.getItem("activeGame") == null) ? {"letters": [], "score": 0, "activeWord": ""} : JSON.parse(localStorage.getItem("activeGame"));
     
     const remainingLetters = activeGame.letters;
-    console.log(remainingLetters);
-    
-    //else if (remainingLetters < 4){
-      const vowels = ["a", "e", "i", "o", "u"];
-      const consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"];
-      var numVowles = Math.floor(Math.random() * 3);
-      var letterPool = remainingLetters;
+    const vowels = ["a", "e", "i", "o", "u"];
+    //non j, x, q, z letters are present twice to make those harder to use letters rarer
+    const consonants = ["b", "c", "d", "f", "g", "h", "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w",
+       "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "x", "y", "y", "z"];
+    var numVowles = Math.floor(Math.random() * 2);
+    var letterPool = remainingLetters;
   
-      for (i = remainingLetters.length; i < 20; i++){
-        if (numVowles < 9){
-          letterPool.push(vowels[Math.floor(Math.random() * vowels.length)]);
-          console.log("Added a vowel to ");
-          console.log(letterPool);
-          numVowles++;
+    //semi randomly populate the letters the player has to use - making sure they don't end up blocked due too many or too few vowels
+    for (i = remainingLetters.length; i < 12; i++){
+        if (numVowles < 5){
+            letterPool.push(vowels[Math.floor(Math.random() * vowels.length)]);
+            numVowles++;
         }
         else {
           letterPool.push(consonants[Math.floor(Math.random() * consonants.length)]);
-          console.log("Added a consonant to ");
-          console.log(letterPool);
+
         }
-      }
-      //vowles.includes();
-      console.log("Returning the following letterPool ");
-      console.log(letterPool);
-      console.log(typeof letterPool);
-      
-      localStorage.setItem("activeGame", JSON.stringify({"letters":letterPool, "score":activeGame.score, "activeWord": activeGame.activeWord}));
-      return letterPool;
-   /* }
-    else {
-      console.log("ERROR: user attempted to draw new letters while still having " + remainingLetters + " remaining.");
-    //  res.status(500).json(err);
     }
-    */
+
+    //shuffle the array so the vowels are mixed within the consonants for easier readability
+    function shuffleArray(arr) {
+      arr.sort(() => Math.random() - 0.5);
+    }
+    shuffleArray(letterPool);
+    
+    //save the letters to the active game in memory/creating a new activeGame with drawn letters
+    localStorage.setItem("activeGame", JSON.stringify({"letters":letterPool, "score":activeGame.score, "activeWord": activeGame.activeWord}));
+    return letterPool;
+
 }
 
-
-
-//ideally a method to make sure the user is unable to put in letters they don't have
-
-
+//initilize docs for later use
 const gameTextEntryInput = document.getElementById('gameTextEntry');
 const gameActiveWord = document.getElementById('gameValues');
 const gameLetterPool = document.getElementById('letterPool');
-//temp (maybe) to auto populate
-var currentLetters = drawLetters();
-var activeGame = JSON.parse(localStorage.getItem("activeGame"))
+const submitWordButton = document.getElementById('submitWord');
+const submittedWord = document.getElementById('submittedWord');
+const submittedWordDef = document.getElementById('submittedWordDef');
+const gameScore = document.getElementById('gameScore');
+const newGameButton = document.getElementById('newGame');
+
+//auto start/resume game on page load
+var currentLetters;
+if (localStorage.getItem("activeGame") == null){
+    currentLetters = drawLetters();
+}
+else {
+    activeGame = JSON.parse(localStorage.getItem("activeGame"));
+    currentLetters = activeGame.letters;
+    gameScore.textContent = gameScore.textContent.substring(0, 7) + activeGame.score;
+}
+
 var activeLetterPool = currentLetters.toString().replace(/,/g, "  ");
 var activeWord = "";
 gameLetterPool.textContent = activeLetterPool;
-//gameTextEntryInput.value = activeWord;
-console.log(currentLetters[0]);
-console.log(typeof currentLetters);
+
+
 
 gameTextEntryInput.addEventListener('input', updateValue);
-
+//function to control how the text entry field works
 function updateValue(e) {
     
     currentLetters = activeGame.letters;
-    console.log(currentLetters);
-    console.log(e.data);
-    console.log(e);
-    console.log(e.inputType);
-    console.log(gameTextEntryInput.value);
-    console.log(activeWord);
-    
-
+    //if the letter typed is avalable to use it adds it to the end of the active word and removes it from the pool of available letters
     if (activeLetterPool.includes(e.data)){
-        console.log(gameLetterPool.textContent);
+        
         activeWord += e.data;
         gameActiveWord.textContent = activeWord;
         activeLetterPool = activeLetterPool.replace(e.data, "");
-        console.log(activeLetterPool);
         gameLetterPool.textContent = activeLetterPool;
         
     }
+    //if backspace is used it deletes the last letter of the active word and re-adds the letter to the pool of available letters
     else if (e.inputType == "deleteContentBackward"){
         activeLetterPool += "  " + activeWord.substring(activeWord.length -1, activeWord.length);
-        console.log(activeLetterPool + "  " + activeWord.substring(activeWord.length -1, activeWord.length));
         activeWord = activeWord.substring(0, activeWord.length -1)
-        console.log(activeWord.substring(0, activeWord.length -1));
-        
         gameLetterPool.textContent = activeLetterPool;
         gameActiveWord.textContent = activeWord;
         
     }
     else {
-        console.log("currentLetters does not contain a ");     
-        console.log(e);
+        console.log("currentLetters does not contain a: " + e.data);     
     }
     gameTextEntryInput.value = activeWord;
     activeGame.activeWord = activeWord;
@@ -117,60 +96,90 @@ function updateValue(e) {
 
 }
 
-const submitWordButton = document.getElementById('submitWord');
-console.log(submitWordButton);
+
+
 submitWordButton.addEventListener('click', submitWord);
-const submittedWord = document.getElementById('submittedWord');
-const submittedWordDef = document.getElementById('submittedWordDef');
-const gameScore = document.getElementById('gameScore');
-
+//function to submit type word - aka check against 3rd party api to see if it is a woord, then permanantly remove the letters from activeGame and award the player with coorisponding points
 function submitWord() {
-    console.log(activeWord);
-    const dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/" + activeWord;
-    console.log(dictAPI);
 
-    try {
-        fetch(dictAPI)
-        .then(response => {
-          if(response.status == 200){
-              response.json()
-              .then(responseJSON => {
-                
-                  submittedWord.textContent += "\n" + activeWord;
-                  submittedWordDef.textContent = responseJSON[0].meanings[0].definitions[0].definition;
-    
-                  const activeWordSplit = activeWord.split('');
-                  for (i = 0; i < activeWordSplit.length; i++){
-                    const indexToRemove = currentLetters.findIndex(req => {
-                      return req == activeWord.split('')[i];
-                    })
+    if (activeWord.length >= 2){
+        const dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/" + activeWord;
+        console.log(dictAPI);
+        submittedWordDef.textContent = "Looking up " + activeWord + "...";
+
+        try {
+            fetch(dictAPI)
+            .then(response => {
+              if(response.status == 200){
+                  response.json()
+                  .then(responseJSON => {
                     
-                    currentLetters.splice(indexToRemove, 1);
-                    console.log(currentLetters);
-                  }
-                  const scoreInt = parseInt(gameScore.textContent.substring(7, gameScore.textContent.length))+ activeWord.length;
-                  console.log(gameScore.textContent.substring(0, 7) + scoreInt);
-                  gameScore.textContent = gameScore.textContent.substring(0, 7) + scoreInt;
-                  activeWord = '';
-                  gameLetterPool.textContent = activeLetterPool;
-                  gameActiveWord.textContent = activeWord;
-                  gameTextEntryInput.value = activeWord;
-                  activeGame.letters = currentLetters;
-                  activeGame.score = scoreInt;
-                  localStorage.setItem("activeGame", JSON.stringify(activeGame));
-                })    
-          }
-          else {
-              submittedWordDef.textContent = "Try again... with a real word this time" 
-              console.log("Error returned - not a word?");
-          }
-        })
-
+                      
+                      submittedWord.textContent += "\n" + activeWord;
+                      submittedWordDef.textContent = responseJSON[0].meanings[0].definitions[0].definition;
         
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-      }
+                      const activeWordSplit = activeWord.split('');
+                      for (i = 0; i < activeWordSplit.length; i++){
+                        const indexToRemove = currentLetters.findIndex(req => {
+                          return req == activeWord.split('')[i];
+                        })
+                        
+                        currentLetters.splice(indexToRemove, 1);
 
+                      }
+                      const scoreInt = parseInt(gameScore.textContent.substring(7, gameScore.textContent.length))+ activeWord.length;
+                      gameScore.textContent = gameScore.textContent.substring(0, 7) + scoreInt;
+                      activeWord = '';
+                      gameLetterPool.textContent = activeLetterPool;
+                      gameActiveWord.textContent = activeWord;
+                      gameTextEntryInput.value = activeWord;
+                      activeGame.letters = currentLetters;
+                      activeGame.score = scoreInt;
+                      localStorage.setItem("activeGame", JSON.stringify(activeGame));
+                      //if the player only has 1 or less letters it starts a new round
+                      if(currentLetters.length <= 1){
+                        //the player uses up all their letter they get a bonus
+                        if (currentLetters.length == 0){
+                          activeGame.score += 3;
+                          gameScore.textContent = gameScore.textContent.substring(0, 7) + activeGame.score;
+                        }
+                        submittedWord.textContent = "";
+                        submittedWordDef.textContent = "Congrats!! Now on to the next round!"
+                        console.log("Letters used up - moving on to the next round");
+                        currentLetters = drawLetters();
+                        activeLetterPool = currentLetters.toString().replace(/,/g, "  ");
+                        gameLetterPool.textContent = activeLetterPool;
+                      }
+                    })    
+              }
+              else {
+                  submittedWordDef.textContent = "Try again... with a real word this time" ;
+                  console.log("Error returned - not a word?");
+              }
+            })
+
+            
+        }
+        catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    }
+}
+
+
+newGameButton.addEventListener('click', newGame);
+//the player uses the new game button to discard thier current progress and start a new game
+function newGame(){
+    activeGame = {"letters": [], "score": 0, "activeWord": ""};
+    localStorage.setItem("activeGame", JSON.stringify(activeGame));    
+    currentLetters = drawLetters();
+    gameScore.textContent = gameScore.textContent.substring(0, 7) + activeGame.score;
+    activeLetterPool = currentLetters.toString().replace(/,/g, "  ");
+    activeWord = "";
+    gameLetterPool.textContent = activeLetterPool;
+    gameActiveWord.textContent = "";
+    gameTextEntryInput.value = "";
+    submittedWord.textContent = "";
+    submittedWordDef.textContent = "";
 }
