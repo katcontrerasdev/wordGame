@@ -82,6 +82,13 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/game', (req, res) => {
+  
+  res.render('game');
+  
+});
+
+
 router.get('/register', (req, res, next) => {
   if (req.session.loggedIn) {
     res.redirect('/');
