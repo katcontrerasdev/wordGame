@@ -73,6 +73,13 @@ router.get('/painting/:id', withAuth, async (req, res) => {
   }
 });
 
+
+router.get('/game', (req, res) => {
+  
+  res.render('game');
+  
+});
+
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -80,12 +87,6 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
-});
-
-router.get('/game', (req, res) => {
-  
-  res.render('game');
-  
 });
 
 

@@ -3,14 +3,18 @@
 @tailwind utilities;
 
 :root {
-    --primary: #F24182;
-    --secondary: #03A6A6;
-    --tertiary: #80F2F2;
-    --quatrinary: #04D912;
+    --primary: #5758ad;
+    --secondary: #DCF238;
+    --tertiary: #5758ad;
+    --quatrinary: #5758ad;
     --light: #DCF238;
     --dark: #000;
     --error: rgb(228, 46, 1);
     --border-radius: 0.3rem;
+  }
+  
+  main {
+    background-color: lightblue;
   }
   
   body {
