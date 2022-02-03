@@ -22,6 +22,7 @@
   </header>
   <nav>
     <a href="/">Home</a>
+     <a href="/highscore">High Score</a>
     {{#if loggedIn}}
     <button id="logout" class="btn-no-style">Logout</button>
     {{else}}
@@ -29,7 +30,7 @@
     {{/if}}
   </nav>
   <main>
-    <div class="gallery">
+    <div class="gallery bg-purple-900">
       {{{body}}}
     </div>
   </main>
