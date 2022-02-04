@@ -88,7 +88,7 @@
     background-color: var(--dark);
   }
   
-  .gallery {
+  .game {
     flex: 4;
     background-color: var(--primary);
     padding: 50px;
