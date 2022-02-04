@@ -18,9 +18,10 @@
 <body>
   <header>  
   <nav>
+    <a href="/">HOME</a>
     <a href="/">ABOUT</a>
     <a href="/game">PLAY</a>
-    <a href="/">HIGH SCORES</a>
+    <a href="/highscore">HIGH SCORES</a>
     {{#if loggedIn}}
     <button id="logout" class="btn-no-style">LOGOUT</button>
     {{else}}
@@ -29,7 +30,7 @@
   </nav>
   </header>
   <main>
-    <div class="gallery">
+    <div class="gallery bg-purple-900">
       {{{body}}}
     </div>
   </main>
