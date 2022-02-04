@@ -15,6 +15,11 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       document.location.replace('/');
+      response.json().then(responseJSON => {
+        const userDetails = JSON.stringify(responseJSON, null, 3);
+        var parsed = JSON.parse(userDetails);
+        localStorage.setItem("userid", parsed.user.id);
+      })
     } else {
       alert('Failed to log in.');
     }

@@ -1,9 +1,13 @@
-
 <div>
-   <img src="images/avatar.png" alt="Work Logo" width="450" height="450"/>
+   <img src="images/avatar.png" alt="Work Logo" width="450" height="450" />
    <h1>If it's a word, it's a WORD.</h1>
-   <p>I'm baby trust fund tumblr snackwave yuccie, fanny pack iceland pop-up biodiesel single-origin coffee blog 
-   activated charcoal. Chambray woke keffiyeh, subway tile migas hashtag brooklyn biodiesel.</p>
-   <button>PLAY</button>
-   <button>LOGIN</button>
+   <p>I'm baby trust fund tumblr snackwave yuccie, fanny pack iceland pop-up biodiesel single-origin coffee blog
+      activated charcoal. Chambray woke keffiyeh, subway tile migas hashtag brooklyn biodiesel.</p>
+   <button id="play"> PLAY </button>
+   {{#if loggedIn}}
+   <button id="logoutbtn">LOGOUT</button>
+    {{else}}
+   <button id="login">LOGIN</button>
+    {{/if}}
 </div>
+<script src="./js/routes.js"></script>
