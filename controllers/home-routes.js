@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const {
-  Gallery,
-  Painting,
   Scores,
   User
 } = require('../models');
@@ -12,21 +10,7 @@ const withAuth = require('../utils/auth');
 // GET all galleries for homepage
 router.get('/', async (req, res) => {
   try {
-    const dbGalleryData = await Gallery.findAll({
-      include: [{
-        model: Painting,
-        attributes: ['filename', 'description'],
-      }, ],
-    });
-
-    const galleries = dbGalleryData.map((gallery) =>
-      gallery.get({
-        plain: true
-      })
-    );
-
     res.render('homepage', {
-      galleries,
       loggedIn: req.session.loggedIn,
     });
   } catch (err) {
@@ -35,62 +19,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET one gallery
-// Use the custom middleware before allowing the user to access the gallery
-router.get('/gallery/:id', withAuth, async (req, res) => {
-  try {
-    const dbGalleryData = await Gallery.findByPk(req.params.id, {
-      include: [{
-        model: Painting,
-        attributes: [
-          'id',
-          'title',
-          'artist',
-          'exhibition_date',
-          'filename',
-          'description',
-        ],
-      }, ],
-    });
-
-    const gallery = dbGalleryData.get({
-      plain: true
-    });
-    res.render('gallery', {
-      gallery,
-      loggedIn: req.session.loggedIn
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-// GET one painting
-// Use the custom middleware before allowing the user to access the painting
-router.get('/painting/:id', withAuth, async (req, res) => {
-  try {
-    const dbPaintingData = await Painting.findByPk(req.params.id);
-
-    const painting = dbPaintingData.get({
-      plain: true
-    });
-
-    res.render('painting', {
-      painting,
-      loggedIn: req.session.loggedIn
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-
 router.get('/game', (req, res) => {
-
+  try {
   res.render('game');
-
+  }catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 router.get('/login', (req, res) => {
@@ -98,10 +33,8 @@ router.get('/login', (req, res) => {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
-
 
 router.get('/register', (req, res, next) => {
   if (req.session.loggedIn) {
@@ -161,6 +94,5 @@ router.post('/score', async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
