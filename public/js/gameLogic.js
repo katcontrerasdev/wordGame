@@ -45,8 +45,11 @@ const gameLetterPool = document.getElementById('letterPool');
 const submitWordButton = document.getElementById('submitWord');
 const submittedWord = document.getElementById('submittedWord');
 const submittedWordDef = document.getElementById('submittedWordDef');
+const gameStatus = document.getElementById('gameStatus');
 const gameScore = document.getElementById('gameScore');
 const newGameButton = document.getElementById('newGame');
+const submitScoreButton = document.getElementById('submitScore');
+
 
 //auto start/resume game on page load
 var currentLetters;
@@ -77,6 +80,7 @@ function updateValue(e) {
         gameActiveWord.textContent = activeWord;
         activeLetterPool = activeLetterPool.replace(e.data, "");
         gameLetterPool.textContent = activeLetterPool;
+        gameStatus.textContent = "";
         
     }
     //if backspace is used it deletes the last letter of the active word and re-adds the letter to the pool of available letters
@@ -105,7 +109,7 @@ function submitWord() {
     if (activeWord.length >= 2){
         const dictAPI = "https://api.dictionaryapi.dev/api/v2/entries/en/" + activeWord;
         console.log(dictAPI);
-        submittedWordDef.textContent = "Looking up " + activeWord + "...";
+        gameStatus.textContent = "Looking up " + activeWord + "...";
 
         try {
             fetch(dictAPI)
@@ -133,6 +137,7 @@ function submitWord() {
                       gameLetterPool.textContent = activeLetterPool;
                       gameActiveWord.textContent = activeWord;
                       gameTextEntryInput.value = activeWord;
+                      gameStatus.textContent = "";
                       activeGame.letters = currentLetters;
                       activeGame.score = scoreInt;
                       localStorage.setItem("activeGame", JSON.stringify(activeGame));
@@ -144,7 +149,7 @@ function submitWord() {
                           gameScore.textContent = gameScore.textContent.substring(0, 7) + activeGame.score;
                         }
                         submittedWord.textContent = "";
-                        submittedWordDef.textContent = "Congrats!! Now on to the next round!"
+                        gameStatus.textContent = "Congrats!! Now on to the next round!"
                         console.log("Letters used up - moving on to the next round");
                         currentLetters = drawLetters();
                         activeLetterPool = currentLetters.toString().replace(/,/g, "  ");
@@ -153,7 +158,7 @@ function submitWord() {
                     })    
               }
               else {
-                  submittedWordDef.textContent = "Try again... with a real word this time" ;
+                  gameStatus.textContent = "Try again... with a real word this time" ;
                   console.log("Error returned - not a word?");
               }
             })
@@ -163,6 +168,7 @@ function submitWord() {
         catch (err) {
             console.log(err);
             res.status(500).json(err);
+            gameStatus.textContent = "Looks like there was an error with the dictionary. Try again."
         }
     }
 }
@@ -182,4 +188,18 @@ function newGame(){
     gameTextEntryInput.value = "";
     submittedWord.textContent = "";
     submittedWordDef.textContent = "";
+    gameStatus.textContent = "Round 1 - Start!";
+}
+
+
+submitScoreButton.addEventListener('click', submitScore);
+function submitScore(){
+
+    if (localStorage.getItem("userid") != null){
+        newGame();
+    }
+    else {
+        gameStatus.textContent = "The user needs to be logged in to save their score to the high score... so login, refresh and SUBMIT!! FOR GLORY!!";
+    }
+
 }
