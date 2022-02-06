@@ -30,6 +30,26 @@
     font-size: 18px;
 }
 
+.btn-outline-primary {
+    color: var(--light);
+    border-color: var(--light);
+}
+
+.btn-outline-primary:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary {
+  color: var(--primary);
+  background-color: #DCF238;
+}
+
+.btn-primary:hover {
+  color: var(--light);
+  background-color: var(--primary);
+}
+
   body {
     background-color: var(--primary);
     font-family: Arial;
