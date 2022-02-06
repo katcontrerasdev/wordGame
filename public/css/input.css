@@ -36,6 +36,7 @@
 }
 
 .btn-outline-primary:hover {
+  background-color: var(--light);
   color: var(--primary);
   border-color: var(--primary);
 }
@@ -46,8 +47,9 @@
 }
 
 .btn-primary:hover {
-  color: var(--light);
   background-color: var(--primary);
+  color: var(--light);
+  border-color: var(--light)
 }
 
   body {
@@ -86,6 +88,7 @@
   nav {
     display: flex;
     background-color: var(--secondary);
+    justify-content: right;
   }
   
   nav a {
@@ -96,16 +99,15 @@
   }
   
   nav a:hover {
-    color: var(--secondary);
-    background-color: var(--dark);
+    color: var(--primary);
+    background-color: var(--light);
   }
   
   .game {
-    flex: 4;
-    background-color: var(--primary);
+    flex: 2;
     padding: 50px;
     display: flex;
-    flex-flow: row wrap;
+    /* flex-flow: row wrap; */
     justify-content: center;
     align-items: center;
   }
