@@ -1,24 +1,41 @@
 {
   "name": "museum-paintings",
   "version": "1.0.0",
-  "description": "",
+  "description": "##changes",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seeds/index.js"
+    "seed": "node seeds/index.js",
+    "build-css": "npx tailwindcss -i ./public/css/input.css -o ./public/css/wordss.css"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.0",
-    "connect-session-sequelize": "^7.0.4",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-handlebars": "^5.2.0",
-    "express-session": "^1.17.1",
-    "handlebars": "^4.7.6",
-    "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "autoprefixer": "^10.4.2",
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.2",
+    "dotenv": "^8.6.0",
+    "express": "^4.17.2",
+    "express-handlebars": "^5.3.5",
+    "express-session": "^1.17.2",
+    "handlebars": "^4.7.7",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "postcss": "^8.4.6",
+    "sequelize": "^6.15.0",
+    "tailwindcss": "^3.0.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katcontrerasdev/uclaProject2.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/katcontrerasdev/uclaProject2/issues"
+  },
+  "homepage": "https://github.com/katcontrerasdev/uclaProject2#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
