@@ -71,14 +71,15 @@ gameLetterPool.textContent = activeLetterPool;
 gameTextEntryInput.addEventListener('input', updateValue);
 //function to control how the text entry field works
 function updateValue(e) {
-    
+    console.log(e.data);
+    const enteredChar = (e.data == null) ? (e.data) : (e.data).toLowerCase();
     currentLetters = activeGame.letters;
     //if the letter typed is avalable to use it adds it to the end of the active word and removes it from the pool of available letters
-    if (activeLetterPool.includes(e.data)){
+    if (activeLetterPool.includes(enteredChar)){
         
-        activeWord += e.data;
+        activeWord += enteredChar;
         gameActiveWord.textContent = activeWord;
-        activeLetterPool = activeLetterPool.replace(e.data, "");
+        activeLetterPool = activeLetterPool.replace(enteredChar, "");
         gameLetterPool.textContent = activeLetterPool;
         gameStatus.textContent = "";
         
@@ -142,10 +143,10 @@ function submitWord() {
                       activeGame.score = scoreInt;
                       localStorage.setItem("activeGame", JSON.stringify(activeGame));
                       //if the player only has 1 or less letters it starts a new round
-                      if(currentLetters.length <= 1){
+                      if(currentLetters.length <= 3){
                         //the player uses up all their letter they get a bonus
                         if (currentLetters.length == 0){
-                          activeGame.score += 3;
+                          activeGame.score += 5;
                           gameScore.textContent = gameScore.textContent.substring(0, 7) + activeGame.score;
                         }
                         submittedWord.textContent = "";
@@ -194,6 +195,7 @@ function newGame(){
 const submitScore = async (event) => {
     event.preventDefault();
     if (localStorage.getItem("userid") != null){
+
         
         const userid = localStorage.getItem("userid");
         const scores = parseInt(activeGame.score);
@@ -202,7 +204,6 @@ const submitScore = async (event) => {
                 body: JSON.stringify({ userid, scores }),
                 headers: { 'Content-Type': 'application/json' },
                 });
-                alert(response.body);
                 if (response.ok) {
                     newGame();
                     alert("Saved score");
@@ -210,6 +211,7 @@ const submitScore = async (event) => {
                 else {
                     alert("Failed to submit score");
                 }
+
     }
     else {
         gameStatus.textContent = "The user needs to be logged in to save their score to the high score... so login, refresh and SUBMIT!! FOR GLORY!!";
