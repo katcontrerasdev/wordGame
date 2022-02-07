@@ -191,15 +191,30 @@ function newGame(){
     gameStatus.textContent = "Round 1 - Start!";
 }
 
-
-submitScoreButton.addEventListener('click', submitScore);
-function submitScore(){
-
+const submitScore = async (event) => {
+    event.preventDefault();
     if (localStorage.getItem("userid") != null){
-        newGame();
+        
+        const userid = localStorage.getItem("userid");
+        const scores = parseInt(activeGame.score);
+        const response = await fetch('/score', {
+                method: 'POST',
+                body: JSON.stringify({ userid, scores }),
+                headers: { 'Content-Type': 'application/json' },
+                });
+                alert(response.body);
+                if (response.ok) {
+                    newGame();
+                    alert("Saved score");
+                }   
+                else {
+                    alert("Failed to submit score");
+                }
     }
     else {
         gameStatus.textContent = "The user needs to be logged in to save their score to the high score... so login, refresh and SUBMIT!! FOR GLORY!!";
     }
 
 }
+
+submitScoreButton.addEventListener('click', submitScore);
