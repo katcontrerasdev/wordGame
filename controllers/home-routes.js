@@ -3,11 +3,9 @@ const {
   Scores,
   User
 } = require('../models');
-// Import the custom middleware
+
 const withAuth = require('../utils/auth');
 
-
-// GET all galleries for homepage
 router.get('/', async (req, res) => {
   try {
     res.render('homepage', {
