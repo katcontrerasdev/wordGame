@@ -197,7 +197,6 @@ const submitScore = async (event) => {
         
         const userid = localStorage.getItem("userid");
         const scores = parseInt(activeGame.score);
-        alert(userid+" "+scores);
         const response = await fetch('/score', {
                 method: 'POST',
                 body: JSON.stringify({ userid, scores }),
