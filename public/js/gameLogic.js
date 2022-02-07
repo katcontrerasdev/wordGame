@@ -202,7 +202,6 @@ const submitScore = async (event) => {
                 body: JSON.stringify({ userid, scores }),
                 headers: { 'Content-Type': 'application/json' },
                 });
-                alert(response.body);
                 if (response.ok) {
                     newGame();
                     alert("Saved score");
