@@ -21,7 +21,7 @@ It's for passing time and having a quick challenge.
 <br />
 This application is covered by the MIT license. 
 ## Contributing
-Kat Contreras, Daniel Vergil Stephen & Dan Brownstone.
+Kat Contreras, Daniel Stephen & Dan Brownstone.
 ## Tests
 coming soon.
 ## Questions
