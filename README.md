@@ -1,3 +1,3 @@
-# uclaProject2
+# If it's a word, it's a WORD
 
-##changes
+##A single player game. Play here: 
