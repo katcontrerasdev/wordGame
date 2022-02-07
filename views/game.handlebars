@@ -1,5 +1,6 @@
-
-  <div class="row justify-space-between-md">
+  
+  <div >
+    <img src="images/avatar.png" alt="Word Logo" width="450" height="450" />
     <div>
       <h1 id="gameScore">Score: 0</h1>
       <hr><br>
@@ -9,9 +10,11 @@
       <hr><br>
       <h2 id="gameValues"></h2>
 
-      <div>
-        <input class="input" type="text" id="gameTextEntry" autocomplete="off"/>
-        <button id="submitWord" type="button" class="btn btn-primary btn-sm">Submit Word</button> <br>
+      <div class="input-group mb-3">
+       
+        <input type="text" id="gameTextEntry" autocomplete="off" class="form-control" aria-describedby="button-addon2">
+        <button class="btn btn-outline-primary" type="button" id="submitWord">Submit</button>
+        </div>
         <h2 id="letterPool"></h2>
         <button id="newGame" type="button" class="btn btn-primary btn-lg">Start a New Game</button>
         <button id="submitScore" type="button" class="btn btn-outline-primary btn-lg">Submit Score</button>
