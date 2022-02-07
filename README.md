@@ -3,7 +3,7 @@
 
 ![badge](https://img.shields.io/badge/license-MIT-brightgreen)<br />
 ## Description
-Single player challenge game. Keep the string of words alive!
+Single player challenge game. Keep the string of words alive! https://secure-earth-04279.herokuapp.com/
 ## Table of Contents
 - [Description](#description)
 - [Installation](#installation)
@@ -13,7 +13,7 @@ Single player challenge game. Keep the string of words alive!
 - [Tests](#tests)
 - [Questions](#questions)
 ## Installation
-Just hit play! https://secure-earth-04279.herokuapp.com/
+Just hit play! 
 ## Usage
 It's for passing time and having a quick challenge.
 ## License
