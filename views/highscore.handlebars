@@ -1,75 +1,73 @@
 <div class="high-score">
-  <h3 class="font-extrabold font-adelia leading-tight text-6xl mt-0 mb-2 text-white" style="font-family: Comic Sans MS, Comic Sans, cursive">HIGH SCORES</h3>
+  <h1 class="py-5">HIGH SCORES</h1>
   <div class="flex flex-col">
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
           <table class="min-w-full text-center">
             <thead class="border-b">
-              <tr class="">
-                <th class="text-5xl bg-gray-500 font-extrabold text-orange-500 px-6 py-4" style="font-family: Comic Sans MS, Comic Sans, cursive">Player</th>
-                <th class="text-5xl bg-gray-500 font-extrabold text-orange-500 px-6 py-4" style="font-family: Comic Sans MS, Comic Sans, cursive">Score</th>
+              <tr>
               </tr>
             </thead>
             <tbody>
               {{#if user_id.[0]}}
-              <tr class="border-b">
-                <td class="text-xl bg-pink-300 text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[0]}}</td>
-                <td class="text-xl bg-pink-300 text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[0]}}</td>
+              <tr>
+                <td><p class="px-5">{{userName.[0]}}</p></td>
+                <td><p class="px-5">{{userScores.[0]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[1]}}
-              <tr class="border-b bg-blue-100 border-blue-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[1]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[1]}}</td>
+              <tr>
+                <td><p>{{userName.[1]}}</p></td>
+                <td><p>{{userScores.[1]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[2]}}
-              <tr class="border-b bg-purple-100 border-purple-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[2]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[2]}}</td>
+              <tr>
+                <td><p>{{userName.[2]}}</p></td>
+                <td><p>{{userScores.[2]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[3]}}
-              <tr class="border-b bg-green-100 border-green-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[3]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[3]}}</td>
+              <tr>
+                <td><p>{{userName.[3]}}</p></td>
+                <td><p>{{userScores.[3]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[4]}}
-              <tr class="border-b bg-red-100 border-red-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[4]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[4]}}</td>
+              <tr>
+                <td><p>{{userName.[4]}}</p></td>
+                <td><p>{{userScores.[4]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[5]}}
-              <tr class="border-b bg-yellow-100 border-yellow-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[5]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[5]}}</td>
+              <tr>
+                <td><p>{{userName.[5]}}</p></td>
+                <td><p>{{userScores.[5]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[6]}}
-              <tr class="border-b bg-indigo-100 border-indigo-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[6]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[6]}}</td>
+              <tr>
+                <td><p>{{userName.[6]}}</p></td>
+                <td><p>{{userScores.[6]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[7]}}
-              <tr class="border-b bg-gray-50 border-gray-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[7]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[7]}}</td>
+              <tr>
+                <td><p>{{userName.[7]}}</p></td>
+                <td><p>{{userScores.[7]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[8]}}
-              <tr class="border-b bg-yellow-200 boder-gray-900">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[8]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[8]}}</td>
+              <tr>
+                <td><p>{{userName.[8]}}</p></td>
+                <td><p>{{userScores.[8]}}</p></td>
               </tr>
               {{/if}}
               {{#if user_id.[9]}}
-              <tr class="border-b bg-blue-100 border-blue-200">
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userName.[9]}}</td>
-                <td class="text-xl text-gray-900 font-medium px-6 py-4 whitespace-nowrap" style="font-family: Trattatello, fantasy">{{userScores.[9]}}</td>
+              <tr>
+                <td><p>{{userName.[9]}}</p></td>
+                <td><p>{{userScores.[9]}}</p></td>
                 {{/if}}
               </tr>
             </tbody>
